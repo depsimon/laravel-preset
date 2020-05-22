@@ -12,7 +12,12 @@ class LaravelPresetServiceProvider extends ServiceProvider
         UiCommand::macro('depsimon', function ($command) {
             LaravelPreset::install();
 
-            $command->comment('Please run "yarn && yarn dev" to compile your new assets.');
+            if ($command->confirm('Do you wish to compile the frontend assets?', true)) {
+                exec('yarn --silent && yarn dev');
+            }
+            if ($command->confirm('Do you wish to update your composer dependencies ?', true)) {
+                exec('composer dump-autoload && composer update');
+            }
         });
     }
 }
