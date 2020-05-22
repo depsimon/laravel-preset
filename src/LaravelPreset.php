@@ -49,12 +49,15 @@ class LaravelPreset extends Preset
             if (!$filesystem->isDirectory($directory = resource_path('css'))) {
                 $filesystem->makeDirectory($directory, 0755, true);
             }
-        });
 
-        copy(__DIR__ . '/../stubs/resources/css/app.css', resource_path('css/app.css'));
-        copy(__DIR__ . '/../stubs/resources/css/_base.css', resource_path('css/_base.css'));
-        copy(__DIR__ . '/../stubs/resources/css/_components.css', resource_path('css/_components.css'));
-        copy(__DIR__ . '/../stubs/resources/css/_utilities.css', resource_path('css/_utilities.css'));
+            collect($filesystem->allFiles(__DIR__ . '/../stubs/resources/css'))
+                ->each(function (SplFileInfo $file) use ($filesystem) {
+                    $filesystem->copy(
+                        $file->getPathname(),
+                        resource_path('css') . '/' . $file->getFilename()
+                    );
+                });
+        });
     }
 
     protected static function updateScripts()
@@ -71,15 +74,17 @@ class LaravelPreset extends Preset
     protected static function updateStubs()
     {
         tap(new Filesystem, function ($filesystem) {
-            $filesystem->makeDirectory(base_path('stubs'), 0755, true);
+            if (!$filesystem->isDirectory($directory = base_path('stubs'))) {
+                $filesystem->makeDirectory(base_path('stubs'), 0755, true);
+            }
 
             collect($filesystem->allFiles(__DIR__ . '/../stubs/app'))
                 ->each(function (SplFileInfo $file) use ($filesystem) {
                     $filesystem->copy(
                         $file->getPathname(),
-                        base_path('stubs')
+                        base_path('stubs') . '/' . $file->getFilename()
                     );
                 });
-        })
+        });
     }
 }
