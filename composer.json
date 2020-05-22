@@ -1,0 +1,13 @@
+{
+    "name": "depsimon/laravel-preset",
+    "description": "An opinionated Preset for Laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simon Depelchin",
+            "email": "dep.simon@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
