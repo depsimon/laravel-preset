@@ -39,6 +39,7 @@ class LaravelPreset extends Preset
         static::updateWebpackConfiguration();
         static::updateStyles();
         static::updateScripts();
+        static::updateViews();
         static::updateStubs();
         static::updateComposerPackages(true);
         static::updateComposerPackages(false);
@@ -100,6 +101,13 @@ class LaravelPreset extends Preset
         });
     }
 
+    protected static function updateViews()
+    {
+        tap(new Filesystem, function ($filesystem) {
+            $filesystem->copyDirectory(__DIR__ . '/../stubs/resources/views', resource_path('views'));
+        });
+    }
+
     protected static function updateStubs()
     {
         tap(new Filesystem, function ($filesystem) {
@@ -107,7 +115,7 @@ class LaravelPreset extends Preset
                 $filesystem->makeDirectory(base_path('stubs'), 0755, true);
             }
 
-            collect($filesystem->allFiles(__DIR__ . '/../stubs/app'))
+            collect($filesystem->allFiles(__DIR__ . '/../stubs/app/stubs'))
                 ->each(function (SplFileInfo $file) use ($filesystem) {
                     $filesystem->copy(
                         $file->getPathname(),
@@ -137,6 +145,27 @@ class LaravelPreset extends Preset
         file_put_contents(
             base_path('composer.json'),
             json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
+        );
+    }
+
+    public static function installAuth()
+    {
+        self::exportAppStubs();
+        self::exportMigration();
+    }
+
+    protected static function exportAppStubs()
+    {
+        tap(new Filesystem, function ($filesystem) {
+            $filesystem->copyDirectory(__DIR__ . '/../stubs/app/app', base_path());
+        });
+    }
+
+    protected static function exportMigration()
+    {
+        copy(
+            __DIR__ . '/../stubs/migrations/create_password_resets_table.php',
+            base_path('database/migrations/' . date('Y_m_d') . '_000000_create_password_resets_table.php')
         );
     }
 }
