@@ -2,6 +2,7 @@
 
 namespace DepSimon\LaravelPreset;
 
+use SplFileInfo;
 use Laravel\Ui\Presets\Preset;
 use Illuminate\Filesystem\Filesystem;
 
@@ -27,8 +28,7 @@ class LaravelPreset extends Preset
         static::updateWebpackConfiguration();
         static::updateStyles();
         static::updateScripts();
-        // static::publishStubs();
-        // static::updateRoutes();
+        static::updateStubs();
     }
 
     protected static function updatePackageArray(array $packages)
@@ -66,5 +66,20 @@ class LaravelPreset extends Preset
         });
 
         copy(__DIR__ . '/../stubs/resources/js/app.js', resource_path('js/app.js'));
+    }
+
+    protected static function updateStubs()
+    {
+        tap(new Filesystem, function ($filesystem) {
+            $filesystem->makeDirectory(base_path('stubs'), 0755, true);
+
+            collect($filesystem->allFiles(__DIR__ . '/../stubs/app'))
+                ->each(function (SplFileInfo $file) use ($filesystem) {
+                    $filesystem->copy(
+                        $file->getPathname(),
+                        base_path('stubs')
+                    );
+                });
+        })
     }
 }
