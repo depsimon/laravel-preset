@@ -1,6 +1,14 @@
 {
     "name": "depsimon/laravel-preset",
     "description": "An opinionated Preset for Laravel",
+    "keywords": [
+        "laravel",
+        "preset",
+        "tailwindcss",
+        "postcss",
+        "stubs",
+        "pest"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -8,6 +16,21 @@
             "email": "dep.simon@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "DepSimon\\LaravelPreset\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DepSimon\\LaravelPreset\\LaravelPresetServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php": "^7.2.5",
+        "laravel/ui": "^2.0"
+    }
 }
