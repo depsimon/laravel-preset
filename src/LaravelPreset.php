@@ -115,7 +115,7 @@ class LaravelPreset extends Preset
                 $filesystem->makeDirectory(base_path('stubs'), 0755, true);
             }
 
-            collect($filesystem->allFiles(__DIR__ . '/../stubs/app/stubs'))
+            collect($filesystem->allFiles(__DIR__ . '/../stubs/app-stubs'))
                 ->each(function (SplFileInfo $file) use ($filesystem) {
                     $filesystem->copy(
                         $file->getPathname(),
@@ -157,7 +157,7 @@ class LaravelPreset extends Preset
     protected static function exportAppStubs()
     {
         tap(new Filesystem, function ($filesystem) {
-            $filesystem->copyDirectory(__DIR__ . '/../stubs/app/app', base_path());
+            $filesystem->copyDirectory(__DIR__ . '/../stubs/root', base_path());
         });
     }
 
