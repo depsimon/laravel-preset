@@ -41,8 +41,7 @@ class LaravelPreset extends Preset
         static::updateScripts();
         static::updateViews();
         static::updateStubs();
-        static::updateComposerPackages(true);
-        static::updateComposerPackages(false);
+        static::updateComposerPackages();
     }
 
     protected static function updatePackageArray(array $packages)
@@ -125,22 +124,29 @@ class LaravelPreset extends Preset
         });
     }
 
-    protected static function updateComposerPackages($dev = true)
+    protected static function updateComposerPackages()
     {
         if (!file_exists(base_path('composer.json'))) {
             return;
         }
 
-        $configurationKey = $dev ? 'require-dev' : 'require';
-
         $packages = json_decode(file_get_contents(base_path('composer.json')), true);
 
-        $packages[$configurationKey] = static::updateComposerPackageArray(
-            array_key_exists($configurationKey, $packages) ? $packages[$configurationKey] : [],
-            $dev
-        );
+        foreach ([true, false] as $dev) {
+            $configurationKey = $dev ? 'require-dev' : 'require';
 
-        ksort($packages[$configurationKey]);
+            $packages[$configurationKey] = static::updateComposerPackageArray(
+                array_key_exists($configurationKey, $packages) ? $packages[$configurationKey] : [],
+                $dev
+            );
+
+            ksort($packages[$configurationKey]);
+        }
+
+        // Register helpers
+        $packages["autoload"]["files"] = [
+            "bootstrap/helpers.php"
+        ];
 
         file_put_contents(
             base_path('composer.json'),
