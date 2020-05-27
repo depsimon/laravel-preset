@@ -9,6 +9,14 @@ module.exports = {
             },
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+            },
+            minHeight: {
+                ...defaultTheme.minHeight,
+                ...defaultTheme.spacing
+            },
+            minWidth: {
+                ...defaultTheme.minWidth,
+                ...defaultTheme.spacing
             }
         },
     },

@@ -1,0 +1,24 @@
+.card {
+    @apply bg-white;
+    @apply flex;
+    @apply flex-col;
+    @apply min-h-10;
+    @apply rounded;
+    @apply shadow;
+    @apply w-full;
+
+    transition: box-shadow .2s ease-in;
+}
+
+.card-header {
+    @apply flex;
+    @apply px-8 py-4;
+    @apply relative;
+    @apply rounded-t;
+}
+
+.card-content {
+    @apply flex-1;
+    @apply relative;
+    @apply px-8 py-4;
+}

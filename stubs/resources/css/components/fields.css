@@ -1,0 +1,146 @@
+.field-group {
+    @apply w-full;
+
+    &:not(.--checkbox) > :not(template) + :not(template) {
+        @apply mt-2;
+    }
+
+    &.--checkbox > :not(template) + :not(template) {
+        @apply mr-2;
+    }
+
+    &.--checkbox {
+        @apply flex;
+        @apply items-center;
+    }
+}
+
+.field {
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+    @apply relative;
+
+    svg {
+        @apply h-6 w-6;
+    }
+
+    &.--select svg {
+        @apply h-4 w-4;
+    }
+
+    .field-icon {
+        @apply absolute;
+        @apply flex;
+        @apply h-full;
+        @apply items-center;
+        @apply justify-center;
+        @apply pointer-events-none;
+        @apply text-gray-600;
+        @apply top-0;
+
+        &.--left {
+            @apply left-0;
+            @apply ml-2;
+        }
+        &.--right {
+            @apply right-0;
+            @apply mr-2;
+        }
+    }
+
+    .field-icon.--left ~ .field-input {
+        @apply pl-10;
+    }
+    .field-icon.--right ~ .field-input {
+        @apply pr-10;
+    }
+}
+
+.field-input {
+    @apply appearance-none;
+    @apply bg-white;
+    @apply border;
+    @apply border-gray-300;
+    @apply font-normal;
+    @apply h-10;
+    @apply outline-none;
+    @apply px-4;
+    @apply rounded;
+    @apply text-sm;
+    @apply text-gray-900;
+    @apply w-full;
+
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+    textarea& {
+        @apply min-h-32;
+        @apply py-4;
+    }
+
+    select& {
+        @apply pr-10;
+    }
+
+    &:hover {
+        @apply border-gray-500;
+    }
+    &:focus {
+        @apply border-primary-500;
+    }
+
+    &[disabled], &.disabled {
+        @apply bg-gray-200;
+        @apply opacity-50;
+
+        &:hover, &:focus {
+            @apply border-gray-300;
+        }
+    }
+
+    &.invalid {
+        @apply border-red-500;
+        @apply text-red-900;
+
+        &::placeholder {
+            @apply text-red-500;
+        }
+
+        &:focus {
+            @apply border-red-500;
+        }
+    }
+}
+
+.field-label {
+    @apply block;
+    @apply font-medium;
+    @apply leading-none;
+    @apply max-w-full;
+    @apply text-sm;
+    @apply text-gray-700;
+
+    &.--checkbox {
+        @apply mb-0;
+    }
+}
+
+.field-checkbox {
+    @apply flex;
+    @apply items-center;
+
+    & > :not(template) + :not(template) {
+        @apply ml-2;
+    }
+}
+
+.field-info {
+    @apply text-xs;
+    @apply text-gray-600;
+}
+
+.field-error {
+    @apply font-medium;
+    @apply text-sm;
+    @apply text-red-600;
+}
