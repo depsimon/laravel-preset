@@ -42,6 +42,8 @@ class LaravelPreset extends Preset
         static::updateViews();
         static::updateStubs();
         static::updateComposerPackages();
+        self::exportAppStubs();
+        self::exportMigration();
     }
 
     protected static function updatePackageArray(array $packages)
@@ -152,12 +154,6 @@ class LaravelPreset extends Preset
             base_path('composer.json'),
             json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
         );
-    }
-
-    public static function installAuth()
-    {
-        self::exportAppStubs();
-        self::exportMigration();
     }
 
     protected static function exportAppStubs()
