@@ -9,7 +9,7 @@
         </h2>
         <p class="mt-2 text-sm text-center text-gray-600 leading-5">
             {{ __('Or') }}
-            <a href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="font-medium text-primary-600 hover:text-primary-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+            <a href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="link">
                 {{ __('sign out') }}
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
+        <div class="card px-4 py-8 sm:px-10">
             @if (session('resent'))
             <div class="flex items-center px-4 py-3 mb-6 text-sm text-white bg-green-500 rounded shadow" role="alert">
                 <svg class="w-4 h-4 mr-3 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -37,7 +37,7 @@
 
                     <form action="{{ route('verification.resend') }}" method="POST" class="inline mt-3">
                         @csrf
-                        <button type="submit" class="text-primary-700 cursor-pointer hover:text-primary-600 focus:outline-none focus:underline transition ease-in-out duration-150">{{ __('click here to request another') }}</button>.
+                        <button type="submit" class="button --block">{{ __('click here to request another') }}</button>.
                     </form>
                 </p>
             </div>
