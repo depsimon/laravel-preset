@@ -73,13 +73,7 @@ class LaravelPreset extends Preset
                 $filesystem->makeDirectory($directory, 0755, true);
             }
 
-            collect($filesystem->allFiles(__DIR__ . '/../stubs/resources/css'))
-                ->each(function (SplFileInfo $file) use ($filesystem) {
-                    $filesystem->copy(
-                        $file->getPathname(),
-                        resource_path('css') . '/' . $file->getFilename()
-                    );
-                });
+            $filesystem->copyDirectory(__DIR__ . '/../stubs/resources/css', resource_path('css'));
 
             copy(__DIR__ . '/../stubs/tailwind.config.js', base_path('tailwind.config.js'));
         });
@@ -92,13 +86,7 @@ class LaravelPreset extends Preset
 
             $filesystem->makeDirectory(resource_path('js'), 0755, true);
 
-            collect($filesystem->allFiles(__DIR__ . '/../stubs/resources/js'))
-                ->each(function (SplFileInfo $file) use ($filesystem) {
-                    $filesystem->copy(
-                        $file->getPathname(),
-                        resource_path('js') . '/' . $file->getFilename()
-                    );
-                });
+            $filesystem->copyDirectory(__DIR__ . '/../stubs/resources/js', resource_path('js'));
         });
     }
 
