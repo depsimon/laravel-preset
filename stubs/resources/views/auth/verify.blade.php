@@ -12,9 +12,9 @@
             <a href="{{ route('login') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="link">
                 {{ __('sign out') }}
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <x-form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
-            </form>
+            </x-form>
         </p>
     </div>
 
@@ -35,10 +35,10 @@
                     {{ __('Before proceeding, please check your email for a verification link.') }}
                     {{ __('If you did not receive the email') }},
 
-                    <form action="{{ route('verification.resend') }}" method="POST" class="inline mt-3">
+                    <x-form action="{{ route('verification.resend') }}" method="POST" class="inline mt-3">
                         @csrf
-                        <button type="submit" class="button --block">{{ __('click here to request another') }}</button>.
-                    </form>
+                        <button type="submit" class="button --primary --block">{{ __('click here to request another') }}</button>.
+                    </x-form>
                 </p>
             </div>
         </div>

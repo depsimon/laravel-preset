@@ -17,21 +17,21 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="card px-4 py-8 sm:px-10">
-            <form method="POST" action="{{ route('login') }}">
+            <x-form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="space-y-6">
-                    <x:app.field-group for="email" label="Email address" required :error="$errors->first('email')">
-                        <x:app.field type="email" id="email" name="email" required autofocus value="{{ old('email', request('email')) }}" />
-                    </x:app.field-group>
+                    <x-field-group for="email" label="Email address" required :error="$errors->first('email')">
+                        <x-field type="email" id="email" name="email" required autofocus value="{{ old('email', request('email')) }}" />
+                    </x-field-group>
 
-                    <x:app.field-group for="password" label="Password" required :error="$errors->first('password')">
-                        <x:app.field type="password" id="password" name="password" required />
-                    </x:app.field-group>
+                    <x-field-group for="password" label="Password" required :error="$errors->first('password')">
+                        <x-field type="password" id="password" name="password" required />
+                    </x-field-group>
 
                     <div class="flex items-center">
-                        <x:app.field-group for="remember" checkbox label="Remember" :error="$errors->first('password')" class="w-auto">
-                            <x:app.field type="checkbox" id="remember" name="remember" />
-                        </x:app.field-group>
+                        <x-field-group for="remember" checkbox label="Remember" :error="$errors->first('password')" class="w-auto">
+                            <x-field type="checkbox" id="remember" name="remember" />
+                        </x-field-group>
 
                         <div class="text-sm leading-5 ml-auto">
                             <a href="{{ route('password.request') }}" class="link">
@@ -42,13 +42,13 @@
 
                     <div>
                         <span class="block w-full rounded-md shadow-sm">
-                            <button type="submit" class="button --block">
+                            <button type="submit" class="button --primary --block">
                                 {{ __('Sign in') }}
                             </button>
                         </span>
                     </div>
                 </div>
-            </form>
+            </x-form>
         </div>
     </div>
 </x:auth.layout>

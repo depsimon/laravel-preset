@@ -13,12 +13,12 @@
         <div class="card px-4 py-8 sm:px-10">
             {{ __('Please confirm your password before continuing.') }}
 
-            <form method="POST" action="{{ route('password.confirm') }}">
+            <x-form method="POST" action="{{ route('password.confirm') }}">
                 @csrf
                 <div class="space-y-6">
-                    <x:app.field-group for="password" label="Password" required :error="$errors->first('password')">
-                        <x:app.field type="password" id="password" name="password" required />
-                    </x:app.field-group>
+                    <x-field-group for="password" label="Password" required :error="$errors->first('password')">
+                        <x-field type="password" id="password" name="password" required />
+                    </x-field-group>
 
                     <div class="flex items-center  mt-6">
                         <div class="text-sm leading-5 ml-auto">
@@ -30,13 +30,13 @@
 
                     <div>
                         <span class="block w-full rounded-md shadow-sm">
-                            <button type="submit" class="button --block">
+                            <button type="submit" class="button --primary --block">
                                 {{ __('Confirm Password') }}
                             </button>
                         </span>
                     </div>
                 </div>
-            </form>
+            </x-form>
             @endif
         </div>
     </div>

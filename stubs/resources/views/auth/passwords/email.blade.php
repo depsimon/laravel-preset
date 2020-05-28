@@ -35,22 +35,22 @@
             </div>
             @endif
 
-            <form method="POST" action="{{ route('password.email') }}">
+            <x-form method="POST" action="{{ route('password.email') }}">
                 @csrf
                 <div class="space-y-6">
-                    <x:app.field-group for="email" label="Email address" required :error="$errors->first('email')">
-                        <x:app.field type="email" id="email" name="email" required autofocus value="{{ old('email', request('email')) }}" />
-                    </x:app.field-group>
+                    <x-field-group for="email" label="Email address" required :error="$errors->first('email')">
+                        <x-field type="email" id="email" name="email" required autofocus value="{{ old('email', request('email')) }}" />
+                    </x-field-group>
 
                     <div>
                         <span class="block w-full rounded-md shadow-sm">
-                            <button type="submit" class="button --block">
+                            <button type="submit" class="button --primary --block">
                                 {{ __('Send Password Reset Link') }}
                             </button>
                         </span>
                     </div>
                 </div>
-            </form>
+            </x-form>
         </div>
     </div>
 </x:auth.layout>
